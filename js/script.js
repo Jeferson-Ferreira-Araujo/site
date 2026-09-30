@@ -1,138 +1,139 @@
-/* =========================================================
-   Jeferson Araujo — Portfólio
-   script.js — dados, renderização e interações
-   ========================================================= */
+/* ===========================================================
+   Jeferson Araujo — Portfólio (Redesign 2026)
+   script.js — dados, renderização, interações e partículas
+   =========================================================== */
 
 (function () {
   'use strict';
 
   /* ---------------------------------------------------------
-     CONFIGURAÇÃO GERAL
-     Altere aqui os links pessoais usados em todo o site.
+     CONFIG
   --------------------------------------------------------- */
   const CONFIG = {
-    githubUrl: 'YOUR_GITHUB_URL', // ex: https://github.com/seu-usuario
-    email: '[ADICIONAR EMAIL]',
-    linkedinUrl: '[ADICIONAR LINK DO LINKEDIN]',
+    githubUrl: 'https://github.com/jeferson-Ferreira-Araujo',
+    email: 'jeferson.tecinfo@gmail.com',
+    linkedinUrl: 'https://www.linkedin.com/in/jefersonfaraujo/',
   };
 
   /* ---------------------------------------------------------
-     STATUS DOS PROJETOS
-     Mapeia cada status para um rótulo e cor (usa as CSS vars
-     --status-* definidas em css/style.css).
+     STATUS MAP
   --------------------------------------------------------- */
   const STATUS_MAP = {
-    dev: { label: 'Em desenvolvimento', color: 'var(--status-dev)' },
-    mvp: { label: 'MVP', color: 'var(--status-mvp)' },
-    experimental: { label: 'Experimental', color: 'var(--status-exp)' },
-    production: { label: 'Em produção', color: 'var(--status-prod)' },
-    concept: { label: 'Conceito', color: 'var(--status-concept)' },
-    archived: { label: 'Arquivado', color: 'var(--status-archived)' },
+    dev: { label: 'Em desenvolvimento', color: 'var(--accent)' },
+    mvp: { label: 'MVP', color: 'var(--green)' },
+    experimental: { label: 'Experimental', color: 'var(--amber)' },
+    production: { label: 'Em produção', color: 'var(--green)' },
+    concept: { label: 'Conceito', color: 'var(--purple)' },
+    archived: { label: 'Arquivado', color: 'var(--text-muted)' },
   };
 
   /* ---------------------------------------------------------
-     PROJETOS
-     Array de dados — adicione novos projetos aqui.
-     `image` pode ficar vazio: um placeholder estilizado
-     será exibido automaticamente.
+     PROJETOS (mesmos dados)
   --------------------------------------------------------- */
   const projects = [
     {
-      name: 'Melhor que Ontem',
-      description: 'Aplicativo baseado em microações personalizadas para ajudar o usuário a evoluir um pouco todos os dias.',
-      category: 'Produtividade & Hábitos',
-      status: 'mvp',
-      technologies: ['React', 'JavaScript', 'Firebase'],
-      image: '',
+      name: 'SAVIA',
+      description: 'Plataforma para pequenos profissionais criarem cursos e disponibilizarem aulas em vídeo. Contextos Criador e Aluno, com Savia Studio para legendas e sugestões por IA.',
+      category: 'Educação & Produto',
+      status: 'production',
+      technologies: ['React Native', 'Expo', 'Supabase', 'TypeScript', 'Groq'],
+      image: 'assets/images/savia.jpg',
       url: '',
       featured: true,
     },
     {
-      name: 'Enxoval de Bebê',
-      description: 'Aplicativo para ajudar famílias a organizar o enxoval com base em data prevista, localização, clima e estação do ano.',
-      category: 'Utilidade & Família',
+      name: 'AUTORA',
+      description: 'Plataforma de automação para Instagram — agendamento inteligente, publicação automática e gestão de mídias para pequenos negócios.',
+      category: 'Automação & Marketing',
+      status: 'production',
+      technologies: ['Next.js', 'TypeScript', 'Prisma', 'Supabase', 'Cloudflare R2', 'Meta API'],
+      image: 'assets/images/autora.jpg',
+      url: 'https://autora-dashboard.vercel.app',
+      featured: true,
+    },
+    {
+      name: 'AVIVAPLAY',
+      description: 'Catálogo de mini-jogos bíblicos pra jogar em grupo. 100% gratuito, sem cadastro, direto no navegador.',
+      category: 'Entretenimento & Fé',
+      status: 'production',
+      technologies: ['JavaScript', 'HTML', 'CSS', 'Bootstrap'],
+      image: 'assets/images/avivaplay.jpg',
+      url: 'https://play-gospel.vercel.app',
+      featured: true,
+    },
+    {
+      name: 'OHANA',
+      description: 'Aplicativo mobile para famílias organizarem calendário, tarefas, rotinas, listas e recados compartilhados.',
+      category: 'Família & Produtividade',
       status: 'mvp',
-      technologies: ['React', 'Expo', 'Firebase', 'AdMob'],
-      image: '',
+      technologies: ['React Native', 'Expo', 'Supabase', 'TypeScript'],
+      image: 'assets/images/ohana.jpg',
       url: '',
       featured: true,
     },
     {
-      name: 'Rede Social de Desafios da Vida Real',
-      description: 'Rede social baseada em desafios e experiências reais, incentivando a saída do consumo passivo de conteúdo.',
-      category: 'Social & Comunidade',
-      status: 'concept',
-      technologies: ['React', 'Node.js'],
-      image: '',
+      name: 'DALIZ',
+      description: 'Aplicativo que ajuda você com micro tarefas e micro ações no dia a dia para se tornar uma pessoa melhor.',
+      category: 'Produtividade & Bem-estar',
+      status: 'dev',
+      technologies: ['Next.js', 'TypeScript', 'Supabase', 'Prisma'],
+      image: 'assets/images/daliz.jpg',
       url: '',
-      featured: false,
-    },
-    {
-      name: 'Plataforma de Minigames Personalizados',
-      description: 'Plataforma onde pais podem criar experiências e minigames personalizados para seus filhos.',
-      category: 'Entretenimento & Família',
-      status: 'concept',
-      technologies: ['JavaScript', 'Node.js'],
-      image: '',
-      url: '',
-      featured: false,
+      featured: true,
     },
   ];
 
   /* ---------------------------------------------------------
-     RENDERIZAÇÃO — PROJETOS
+     RENDER PROJECTS
   --------------------------------------------------------- */
   function renderProjects() {
     const grid = document.getElementById('projectsGrid');
     if (!grid) return;
 
-    grid.innerHTML = projects.map((project) => {
-      const status = STATUS_MAP[project.status] || STATUS_MAP.concept;
-      const media = project.image
-        ? `<img src="${escapeAttr(project.image)}" alt="Mockup do projeto ${escapeAttr(project.name)}" loading="lazy">`
-        : `<div class="project-media-placeholder" aria-hidden="true">${initials(project.name)}</div>`;
+    grid.innerHTML = projects.map(function (project) {
+      var status = STATUS_MAP[project.status] || STATUS_MAP.concept;
+      var media = project.image
+        ? '<img src="' + escapeAttr(project.image) + '" alt="Mockup do projeto ' + escapeAttr(project.name) + '" loading="lazy">'
+        : '<div class="project-placeholder" aria-hidden="true">' + initials(project.name) + '</div>';
 
-      const techPills = project.technologies
-        .map((tech) => `<span class="tech-pill">${escapeHtml(tech)}</span>`)
+      var techPills = project.technologies
+        .map(function (tech) { return '<span class="tech-pill">' + escapeHtml(tech) + '</span>'; })
         .join('');
 
-      const primaryBtn = project.url
-        ? `<a href="${escapeAttr(project.url)}" class="btn btn-accent" target="_blank" rel="noopener noreferrer">Ver projeto</a>`
-        : `<span class="btn btn-outline" aria-disabled="true" title="Em construção">Ver projeto</span>`;
+      var featuredBadge = project.featured
+        ? '<span class="project-featured">Destaque</span>'
+        : '';
 
-      return `
-        <div class="col-md-6 col-lg-6" data-reveal>
-          <article class="project-card">
-            <div class="project-media">
-              ${media}
-              <span class="status-badge">
-                <span class="status-dot" style="background:${status.color}"></span>
-                ${escapeHtml(status.label)}
-              </span>
-            </div>
-            <div class="project-body">
-              <span class="project-category">${escapeHtml(project.category)}</span>
-              <h3>${escapeHtml(project.name)}</h3>
-              <p class="project-desc">${escapeHtml(project.description)}</p>
-              <div class="project-tech">${techPills}</div>
-              <div class="project-actions">
-                ${primaryBtn}
-                <a href="#contato" class="btn btn-outline">Ver detalhes</a>
-              </div>
-            </div>
-          </article>
-        </div>
-      `;
+      return (
+        '<div data-reveal-scale>' +
+          '<article class="project-card">' +
+            '<div class="project-media">' +
+              media +
+              '<span class="status-badge">' +
+                '<span class="status-dot" style="background:' + status.color + '"></span>' +
+                escapeHtml(status.label) +
+              '</span>' +
+              featuredBadge +
+            '</div>' +
+            '<div class="project-body">' +
+              '<span class="project-category">' + escapeHtml(project.category) + '</span>' +
+              '<h3>' + escapeHtml(project.name) + '</h3>' +
+              '<p class="project-desc">' + escapeHtml(project.description) + '</p>' +
+              '<div class="project-tech">' + techPills + '</div>' +
+            '</div>' +
+          '</article>' +
+        '</div>'
+      );
     }).join('');
 
-    observeReveal(grid.querySelectorAll('[data-reveal]'));
+    observeReveal(grid.querySelectorAll('[data-reveal-scale]'));
   }
 
   /* ---------------------------------------------------------
      HELPERS
   --------------------------------------------------------- */
   function escapeHtml(str) {
-    const div = document.createElement('div');
+    var div = document.createElement('div');
     div.textContent = str;
     return div.innerHTML;
   }
@@ -142,101 +143,93 @@
   }
 
   function initials(name) {
-    return name
-      .split(' ')
-      .filter(Boolean)
-      .slice(0, 2)
-      .map((w) => w[0])
-      .join('')
-      .toUpperCase();
+    return name.split(' ').filter(Boolean).slice(0, 2).map(function (w) { return w[0]; }).join('').toUpperCase();
   }
 
   /* ---------------------------------------------------------
-     LINKS CONFIGURÁVEIS
+     LINKS CONFIG
   --------------------------------------------------------- */
   function applyConfig() {
-    document.querySelectorAll('#githubLink, #githubLink2').forEach((el) => {
-      el.setAttribute('href', CONFIG.githubUrl);
-    });
+    var githubLinks = document.querySelectorAll('#githubLink, #githubLink2');
+    githubLinks.forEach(function (el) { el.setAttribute('href', CONFIG.githubUrl); });
 
-    const githubValue = document.querySelector('#githubLink2 .contact-link-value');
-    if (githubValue) githubValue.textContent = CONFIG.githubUrl;
+    var githubVal = document.querySelector('#githubLink2 .contact-link-value');
+    if (githubVal) githubVal.textContent = CONFIG.githubUrl;
 
-    const emailLink = document.getElementById('emailLink');
+    var emailLink = document.getElementById('emailLink');
     if (emailLink) {
-      emailLink.setAttribute('href', `mailto:${CONFIG.email}`);
-      const val = emailLink.querySelector('.contact-link-value');
+      emailLink.setAttribute('href', 'mailto:' + CONFIG.email);
+      var val = emailLink.querySelector('.contact-link-value');
       if (val) val.textContent = CONFIG.email;
     }
 
-    const linkedinLink = document.getElementById('linkedinLink');
+    var linkedinLink = document.getElementById('linkedinLink');
     if (linkedinLink) {
       linkedinLink.setAttribute('href', CONFIG.linkedinUrl);
-      const val = linkedinLink.querySelector('.contact-link-value');
+      var val = linkedinLink.querySelector('.contact-link-value');
       if (val) val.textContent = CONFIG.linkedinUrl;
     }
   }
 
   /* ---------------------------------------------------------
-     NAVBAR — scroll state, mobile menu, active link, smooth scroll
+     NAVBAR
   --------------------------------------------------------- */
   function initNavbar() {
-    const header = document.getElementById('siteHeader');
-    const toggle = document.getElementById('navToggle');
-    const menu = document.getElementById('navMenu');
-    const navLinks = document.querySelectorAll('[data-nav]');
+    var header = document.getElementById('siteHeader');
+    var toggle = document.getElementById('navToggle');
+    var menu = document.getElementById('navMenu');
+    var navLinks = document.querySelectorAll('[data-nav]');
 
-    const onScroll = () => {
+    function onScroll() {
       header.classList.toggle('is-scrolled', window.scrollY > 12);
-    };
+    }
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
 
-    toggle.addEventListener('click', () => {
-      const isOpen = menu.classList.toggle('is-open');
+    toggle.addEventListener('click', function () {
+      var isOpen = menu.classList.toggle('is-open');
       toggle.setAttribute('aria-expanded', String(isOpen));
     });
 
-    menu.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', () => {
+    menu.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
         menu.classList.remove('is-open');
         toggle.setAttribute('aria-expanded', 'false');
       });
     });
 
-    const sections = Array.from(navLinks)
-      .map((link) => document.querySelector(link.getAttribute('href')))
+    var sections = Array.from(navLinks)
+      .map(function (link) { return document.querySelector(link.getAttribute('href')); })
       .filter(Boolean);
 
     if ('IntersectionObserver' in window && sections.length) {
-      const sectionObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          const id = entry.target.getAttribute('id');
-          const link = document.querySelector(`[data-nav][href="#${id}"]`);
+      var sectionObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          var id = entry.target.getAttribute('id');
+          var link = document.querySelector('[data-nav][href="#' + id + '"]');
           if (!link) return;
           if (entry.isIntersecting) {
-            navLinks.forEach((l) => l.classList.remove('is-active'));
+            navLinks.forEach(function (l) { return l.classList.remove('is-active'); });
             link.classList.add('is-active');
           }
         });
       }, { rootMargin: '-45% 0px -45% 0px' });
 
-      sections.forEach((section) => sectionObserver.observe(section));
+      sections.forEach(function (section) { return sectionObserver.observe(section); });
     }
   }
 
   /* ---------------------------------------------------------
      REVEAL ON SCROLL
   --------------------------------------------------------- */
-  let revealObserver;
+  var revealObserver;
 
   function getRevealObserver() {
     if (revealObserver) return revealObserver;
-
     if (!('IntersectionObserver' in window)) return null;
 
-    revealObserver = new IntersectionObserver((entries, obs) => {
-      entries.forEach((entry) => {
+    revealObserver = new IntersectionObserver(function (entries, obs) {
+      entries.forEach(function (entry) {
         if (entry.isIntersecting) {
           entry.target.classList.add('is-visible');
           obs.unobserve(entry.target);
@@ -248,10 +241,10 @@
   }
 
   function observeReveal(elements) {
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const observer = getRevealObserver();
+    var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var observer = getRevealObserver();
 
-    elements.forEach((el) => {
+    elements.forEach(function (el) {
       if (prefersReduced || !observer) {
         el.classList.add('is-visible');
       } else {
@@ -261,38 +254,34 @@
   }
 
   /* ---------------------------------------------------------
-     CONTADOR DE ESTATÍSTICAS
+     COUNTERS
   --------------------------------------------------------- */
   function initStatCounters() {
-    const counters = document.querySelectorAll('[data-counter]');
+    var counters = document.querySelectorAll('[data-counter]');
     if (!counters.length) return;
 
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    const animateCounter = (el) => {
-      const target = parseInt(el.getAttribute('data-counter'), 10) || 0;
+    function animateCounter(el) {
+      var target = parseInt(el.getAttribute('data-counter'), 10) || 0;
+      if (prefersReduced) { el.textContent = String(target); return; }
 
-      if (prefersReduced) {
-        el.textContent = String(target);
-        return;
-      }
-
-      const duration = 900;
-      const start = performance.now();
+      var duration = 900;
+      var start = performance.now();
 
       function tick(now) {
-        const progress = Math.min((now - start) / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3);
+        var progress = Math.min((now - start) / duration, 1);
+        var eased = 1 - Math.pow(1 - progress, 3);
         el.textContent = String(Math.round(eased * target));
         if (progress < 1) requestAnimationFrame(tick);
       }
 
       requestAnimationFrame(tick);
-    };
+    }
 
     if ('IntersectionObserver' in window) {
-      const observer = new IntersectionObserver((entries, obs) => {
-        entries.forEach((entry) => {
+      var observer = new IntersectionObserver(function (entries, obs) {
+        entries.forEach(function (entry) {
           if (entry.isIntersecting) {
             animateCounter(entry.target);
             obs.unobserve(entry.target);
@@ -300,17 +289,115 @@
         });
       }, { threshold: 0.6 });
 
-      counters.forEach((el) => observer.observe(el));
+      counters.forEach(function (el) { return observer.observe(el); });
     } else {
       counters.forEach(animateCounter);
     }
   }
 
   /* ---------------------------------------------------------
-     FOOTER — ano atual
+     PARTICLES (Canvas)
+  --------------------------------------------------------- */
+  function initParticles() {
+    var canvas = document.getElementById('particleCanvas');
+    if (!canvas) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      canvas.style.display = 'none';
+      return;
+    }
+
+    var ctx = canvas.getContext('2d');
+    var particles = [];
+    var w, h;
+
+    function resize() {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+    }
+
+    resize();
+    window.addEventListener('resize', resize, { passive: true });
+
+    var count = Math.min(Math.floor((w * h) / 15000), 80);
+
+    for (var i = 0; i < count; i++) {
+      particles.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        r: Math.random() * 1.8 + 0.5,
+        a: Math.random() * 0.4 + 0.1,
+      });
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, w, h);
+
+      for (var i = 0; i < particles.length; i++) {
+        var p = particles[i];
+
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0) p.x = w;
+        if (p.x > w) p.x = 0;
+        if (p.y < 0) p.y = h;
+        if (p.y > h) p.y = 0;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(124, 155, 255, ' + p.a + ')';
+        ctx.fill();
+
+        // Lines between close particles
+        for (var j = i + 1; j < particles.length; j++) {
+          var p2 = particles[j];
+          var dx = p.x - p2.x;
+          var dy = p.y - p2.y;
+          var dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < 120) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = 'rgba(124, 155, 255, ' + (0.08 * (1 - dist / 120)) + ')';
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+      }
+
+      requestAnimationFrame(draw);
+    }
+
+    draw();
+  }
+
+  /* ---------------------------------------------------------
+     CURSOR GLOW
+  --------------------------------------------------------- */
+  function initCursorGlow() {
+    var glow = document.getElementById('cursorGlow');
+    if (!glow) return;
+
+    var isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    if (isTouchDevice) {
+      document.documentElement.classList.add('cursor-disabled');
+      return;
+    }
+
+    document.addEventListener('mousemove', function (e) {
+      glow.style.left = e.clientX + 'px';
+      glow.style.top = e.clientY + 'px';
+    }, { passive: true });
+  }
+
+  /* ---------------------------------------------------------
+     YEAR
   --------------------------------------------------------- */
   function setYear() {
-    const yearEl = document.getElementById('year');
+    var yearEl = document.getElementById('year');
     if (yearEl) yearEl.textContent = String(new Date().getFullYear());
   }
 
@@ -318,25 +405,26 @@
      EASTER EGG
   --------------------------------------------------------- */
   function consoleEasterEgg() {
-    const styleTitle = 'color:#5B8CFF;font-size:16px;font-weight:bold;font-family:monospace;';
-    const styleText = 'color:#9AA4B2;font-size:12px;font-family:monospace;';
-
-    console.log('%cOlá, dev 👋', styleTitle);
-    console.log('%cSe você chegou até aqui olhando o console, provavelmente também gosta de entender como as coisas funcionam por dentro.', styleText);
-    console.log('%cVamos trocar uma ideia? ' + CONFIG.githubUrl, styleText);
+    console.log('%cOl\u00e1, dev \ud83d\udc4b', 'color:#7C9BFF;font-size:16px;font-weight:bold;font-family:monospace;');
+    console.log('%cSe voc\u00ea chegou at\u00e9 aqui olhando o console, provavelmente tamb\u00e9m gosta de entender como as coisas funcionam por dentro.', 'color:#9AA4B2;font-size:12px;font-family:monospace;');
+    console.log('%cVamos trocar uma ideia? ' + CONFIG.githubUrl, 'color:#9AA4B2;font-size:12px;font-family:monospace;');
   }
 
   /* ---------------------------------------------------------
      INIT
   --------------------------------------------------------- */
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('DOMContentLoaded', function () {
     applyConfig();
     initNavbar();
     renderProjects();
     initStatCounters();
+    initParticles();
+    initCursorGlow();
     setYear();
     consoleEasterEgg();
 
-    observeReveal(document.querySelectorAll('[data-reveal]:not(#projectsGrid [data-reveal])'));
+    observeReveal(document.querySelectorAll('[data-reveal]:not(#projectsGrid [data-reveal], #projectsGrid [data-reveal-scale])'));
+    observeReveal(document.querySelectorAll('[data-reveal-scale]:not(#projectsGrid [data-reveal-scale])'));
   });
+
 })();

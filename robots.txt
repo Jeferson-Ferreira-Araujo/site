@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-
-Sitemap: [ADICIONAR URL DO SITE]/sitemap.xml
+Sitemap: https://portfolio.jefersonaraujo.com.br/sitemap.xml

@@ -5,27 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jeferson Araujo — Desenvolvedor &amp; Criador de Produtos Digitais</title>
   <meta name="description" content="Jeferson Araujo — desenvolvedor full stack focado em transformar ideias em produtos digitais reais. Web, MVPs, automação e experimentação tecnológica.">
-  <meta name="keywords" content="Jeferson Araujo, desenvolvedor full stack, produtos digitais, MVP, React, Node.js, PHP, CodeIgniter, portfólio">
+  <meta name="keywords" content="Jeferson Araujo, desenvolvedor full stack, produtos digitais, MVP, React, Node.js, PHP, portfólio">
   <meta name="author" content="Jeferson Araujo">
-  <link rel="canonical" href="[ADICIONAR URL DO SITE]">
+  <link rel="canonical" href="https://portfolio.jefersonaraujo.com.br">
 
-  <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Jeferson Araujo — Desenvolvedor & Criador de Produtos Digitais">
   <meta property="og:description" content="Desenvolvimento, produto e ideias que viram realidade.">
   <meta property="og:image" content="assets/images/og-cover.jpg">
-  <meta property="og:url" content="[ADICIONAR URL DO SITE]">
+  <meta property="og:url" content="https://portfolio.jefersonaraujo.com.br">
   <meta name="twitter:card" content="summary_large_image">
 
   <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <!-- Bootstrap 5 -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -33,35 +28,53 @@
 
   <a class="skip-link" href="#main">Pular para o conteúdo</a>
 
+  <!-- Animated Background -->
+  <div class="bg-canvas" aria-hidden="true">
+    <div class="bg-gradient-sphere bg-sphere-1"></div>
+    <div class="bg-gradient-sphere bg-sphere-2"></div>
+    <div class="bg-gradient-sphere bg-sphere-3"></div>
+    <div class="bg-grid"></div>
+  </div>
+
+  <!-- Particle Canvas -->
+  <canvas id="particleCanvas" aria-hidden="true"></canvas>
+
+  <!-- Cursor Glow -->
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+
   <!-- ===================== NAVBAR ===================== -->
   <header class="site-header" id="siteHeader">
-    <nav class="navbar navbar-expand-lg" aria-label="Navegação principal">
-      <div class="container nav-container">
-        <a class="brand" href="#top" aria-label="Jeferson Araujo — início">
-          <span class="brand-mark">JA</span>
-          <span class="brand-name">Jeferson Araujo</span>
-        </a>
+    <nav class="nav-container container" aria-label="Navegação principal">
+      <a class="brand" href="#top" aria-label="Jeferson Araujo — início">
+        <span class="brand-mark">JA</span>
+        <span class="brand-name">Jeferson Araujo</span>
+      </a>
 
-        <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Abrir menu de navegação">
-          <span></span><span></span><span></span>
-        </button>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Abrir menu de navegação">
+        <span></span><span></span><span></span>
+      </button>
 
-        <div class="nav-menu" id="navMenu">
-          <ul class="nav-links">
-            <li><a href="#sobre" data-nav>Sobre</a></li>
-            <li><a href="#projetos" data-nav>Projetos</a></li>
-            <li><a href="#stack" data-nav>Stack</a></li>
-            <li><a href="#contato" data-nav>Contato</a></li>
-          </ul>
-          <div class="nav-actions">
-            <a href="#projetos" class="btn btn-accent nav-cta">Ver projetos</a>
-            <a href="YOUR_GITHUB_URL" id="githubLink" class="nav-github" target="_blank" rel="noopener noreferrer" aria-label="Visitar meu GitHub">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
-                <path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.76.12 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14 0 1.55-.01 2.79-.01 3.17 0 .3.21.66.79.55A10.51 10.51 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"/>
-              </svg>
-            </a>
-          </div>
+      <div class="nav-links" id="navMenu">
+        <a href="#sobre" data-nav>Sobre</a>
+        <a href="#projetos" data-nav>Projetos</a>
+        <a href="#contato" data-nav>Contato</a>
+        <div class="nav-actions-mobile">
+          <a href="#projetos" class="btn btn-primary nav-cta">Ver projetos</a>
+          <a href="https://github.com/jeferson-Ferreira-Araujo" id="githubLink" class="nav-github" target="_blank" rel="noopener noreferrer" aria-label="Visitar meu GitHub">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+              <path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.76.12 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14 0 1.55-.01 2.79-.01 3.17 0 .3.21.66.79.55A10.51 10.51 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"/>
+            </svg>
+          </a>
         </div>
+      </div>
+
+      <div class="nav-actions">
+        <a href="#projetos" class="btn btn-primary nav-cta">Ver projetos</a>
+        <a href="https://github.com/jeferson-Ferreira-Araujo" id="githubLink" class="nav-github" target="_blank" rel="noopener noreferrer" aria-label="Visitar meu GitHub">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+            <path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.76.12 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14 0 1.55-.01 2.79-.01 3.17 0 .3.21.66.79.55A10.51 10.51 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"/>
+          </svg>
+        </a>
       </div>
     </nav>
   </header>
@@ -70,17 +83,14 @@
 
     <!-- ===================== HERO ===================== -->
     <section class="hero" id="top">
-      <div class="hero-bg" aria-hidden="true">
-        <div class="grid-overlay"></div>
-        <div class="glow glow-a"></div>
-        <div class="glow glow-b"></div>
-      </div>
-
-      <div class="container hero-container">
+      <div class="hero-container container">
         <div class="hero-content" data-reveal>
-          <p class="eyebrow">Desenvolvedor Full Stack · Produtos Digitais</p>
+          <div class="hero-tag">
+            <span class="hero-tag-dot"></span>
+            Desenvolvedor Full Stack · Produtos Digitais
+          </div>
           <h1 class="hero-title">
-            Eu transformo <span class="text-accent">ideias</span><br>
+            Eu transformo <span class="gradient-text">ideias</span><br>
             em produtos digitais.
           </h1>
           <p class="hero-desc">
@@ -88,91 +98,63 @@
             em experiências digitais funcionais — do primeiro rascunho ao produto em uso.
           </p>
           <div class="hero-actions">
-            <a href="#projetos" class="btn btn-accent btn-lg">Ver meus projetos</a>
-            <a href="#sobre" class="btn btn-outline btn-lg">Conhecer meu trabalho</a>
+            <a href="#projetos" class="btn btn-primary btn-lg">Ver meus projetos</a>
+            <a href="#sobre" class="btn btn-glass btn-lg">Conhecer meu trabalho</a>
           </div>
         </div>
 
         <div class="hero-visual" data-reveal aria-hidden="true">
-          <div class="terminal-card">
-            <div class="terminal-bar">
-              <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
-              <span class="terminal-title">ideia.build</span>
-            </div>
-            <pre class="terminal-body"><code><span class="tk-com">// pipeline de criação</span>
-<span class="tk-key">const</span> <span class="tk-var">produto</span> = <span class="tk-fn">criar</span>({
-  <span class="tk-prop">origem</span>: <span class="tk-str">"problema real"</span>,
-  <span class="tk-prop">etapas</span>: [<span class="tk-str">"ideia"</span>, <span class="tk-str">"protótipo"</span>, <span class="tk-str">"código"</span>],
-  <span class="tk-prop">stack</span>: [<span class="tk-str">"React"</span>, <span class="tk-str">"Node"</span>, <span class="tk-str">"PHP"</span>],
-});
-
-<span class="tk-fn">produto</span>.<span class="tk-fn">lançar</span>();
-<span class="tk-com">// status: em construção ✓</span></code></pre>
-          </div>
-
-          <div class="node-graph">
-            <svg viewBox="0 0 240 180" class="node-svg" aria-hidden="true">
-              <line x1="30" y1="140" x2="110" y2="60" class="node-line"></line>
-              <line x1="110" y1="60" x2="200" y2="30" class="node-line"></line>
-              <line x1="110" y1="60" x2="190" y2="120" class="node-line"></line>
-              <line x1="30" y1="140" x2="90" y2="150" class="node-line"></line>
-              <circle cx="30" cy="140" r="6" class="node-dot"></circle>
-              <circle cx="110" cy="60" r="7" class="node-dot node-dot-accent"></circle>
-              <circle cx="200" cy="30" r="5" class="node-dot"></circle>
-              <circle cx="190" cy="120" r="5" class="node-dot"></circle>
-              <circle cx="90" cy="150" r="4" class="node-dot"></circle>
-            </svg>
+          <div class="hero-cube-stack">
+            <div class="hero-ring"></div>
+            <div class="hero-cube hero-cube-1">&lt;/&gt;</div>
+            <div class="hero-cube hero-cube-2">JS</div>
+            <div class="hero-cube hero-cube-3">{ }</div>
           </div>
         </div>
       </div>
 
       <a href="#sobre" class="scroll-indicator" aria-label="Rolar para a próxima seção">
-        <span></span>
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
       </a>
     </section>
 
     <!-- ===================== SOBRE ===================== -->
     <section class="section" id="sobre">
       <div class="container">
-        <div class="row gy-5 align-items-center">
-          <div class="col-lg-6" data-reveal>
-            <p class="section-eyebrow">Sobre mim</p>
+        <div class="about-grid">
+          <div class="about-content" data-reveal>
+            <span class="section-tag">Sobre mim</span>
             <h2 class="section-title">Mais do que código, eu penso em produto.</h2>
-            <p class="section-text">
-              Sou desenvolvedor full stack e gosto de construir coisas que funcionam de verdade —
-              desde a arquitetura de um sistema até o detalhe visual que faz uma interface parecer certa.
-              Tenho experiência prática com aplicações web, APIs e integrações, e uso isso como base
-              para experimentar novas ideias.
-            </p>
-            <p class="section-text">
-              Gosto de pensar no produto como um todo: problema, ideia, experiência, solução e tecnologia.
-              Por isso, além de programar, também idealizo projetos próprios — alguns viram MVPs,
-              outros ficam como experimentos, mas todos me ensinam algo novo.
-            </p>
+            <div class="about-text">
+              <p>
+                Sou desenvolvedor full stack com foco em produto. Construo
+                aplicações web completas — do backend à interface — e cuido
+                para que cada detalhe técnico sirva a uma boa experiência.
+              </p>
+              <p>
+                Gosto de mergulhar no problema antes de pensar na solução, e
+                é assim que nascem meus projetos autorais, MVPs e
+                experimentos com novas tecnologias. Para mim, programar é um
+                meio de transformar ideias em algo que funciona de verdade.
+              </p>
+            </div>
+
+            <div class="about-badges">
+              <span class="badge">React</span>
+              <span class="badge">Next.js</span>
+              <span class="badge">TypeScript</span>
+              <span class="badge">Node.js</span>
+              <span class="badge">React Native</span>
+              <span class="badge">PostgreSQL</span>
+              <span class="badge">APIs REST</span>
+              <span class="badge">Supabase</span>
+            </div>
           </div>
 
-          <div class="col-lg-6" data-reveal>
-            <div class="about-cards">
-              <div class="about-card">
-                <span class="about-card-index">01</span>
-                <h3>Desenvolvimento</h3>
-                <p>Aplicações web reais, do backend à interface.</p>
-              </div>
-              <div class="about-card">
-                <span class="about-card-index">02</span>
-                <h3>Produto</h3>
-                <p>Pensar na experiência antes da tecnologia.</p>
-              </div>
-              <div class="about-card">
-                <span class="about-card-index">03</span>
-                <h3>Experimentos</h3>
-                <p>Protótipos e testes com novas tecnologias.</p>
-              </div>
-              <div class="about-card">
-                <span class="about-card-index">04</span>
-                <h3>Projetos próprios</h3>
-                <p>Ideias que saem do papel por conta própria.</p>
-              </div>
+          <div class="about-photo" data-reveal>
+            <div class="about-photo-frame">
+              <img src="assets/images/jeferson.jpg" alt="Jeferson Araujo — desenvolvedor full stack" class="about-photo-img" loading="lazy">
             </div>
           </div>
         </div>
@@ -182,151 +164,41 @@
     <!-- ===================== PROJETOS ===================== -->
     <section class="section" id="projetos">
       <div class="container">
-        <div class="section-head" data-reveal>
-          <p class="section-eyebrow">Portfólio</p>
+        <div class="section-header" data-reveal>
+          <span class="section-tag">Portfólio</span>
           <h2 class="section-title">Projetos que estou construindo</h2>
           <p class="section-subtitle">Algumas ideias saíram do papel. Outras ainda estão sendo construídas.</p>
         </div>
 
-        <div class="row g-4" id="projectsGrid">
-          <!-- Cards renderizados via js/script.js a partir do array `projects` -->
+        <div class="projects-grid" id="projectsGrid">
+          <!-- Renderizado via js/script.js -->
         </div>
-      </div>
-    </section>
-
-    <!-- ===================== ATUAÇÃO + STACK ===================== -->
-    <section class="section section-alt" id="stack">
-      <div class="container">
-        <div class="section-head" data-reveal>
-          <p class="section-eyebrow">Atuação &amp; Tecnologias</p>
-          <h2 class="section-title">O que eu faço, com o que eu construo</h2>
-          <p class="section-subtitle">As frentes onde atuo, sustentadas por um conjunto de tecnologias que uso no dia a dia.</p>
-        </div>
-
-        <div class="row g-4 g-lg-5 atuacao-split">
-          <div class="col-lg-6">
-            <div class="row g-3 expertise-grid">
-              <div class="col-sm-6" data-reveal>
-                <div class="expertise-card">
-                  <span class="feature-num">01</span>
-                  <h3>Desenvolvimento Web</h3>
-                  <p>Aplicações modernas, responsivas e escaláveis.</p>
-                </div>
-              </div>
-              <div class="col-sm-6" data-reveal>
-                <div class="expertise-card">
-                  <span class="feature-num">02</span>
-                  <h3>Produtos Digitais</h3>
-                  <p>Da ideia ao MVP funcional.</p>
-                </div>
-              </div>
-              <div class="col-sm-6" data-reveal>
-                <div class="expertise-card">
-                  <span class="feature-num">03</span>
-                  <h3>Backend &amp; APIs</h3>
-                  <p>Sistemas, integrações e APIs.</p>
-                </div>
-              </div>
-              <div class="col-sm-6" data-reveal>
-                <div class="expertise-card">
-                  <span class="feature-num">04</span>
-                  <h3>Automação &amp; Experimentação</h3>
-                  <p>Tarefas repetitivas e novas ideias.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-6">
-            <div class="stack-col" data-reveal>
-              <p class="stack-col-label">Stack</p>
-              <div class="tech-cloud">
-                <div class="tech-cloud-group">
-                  <span class="tech-cloud-label">Frontend</span>
-                  <span class="tech-cloud-pill">HTML</span>
-                  <span class="tech-cloud-pill">CSS</span>
-                  <span class="tech-cloud-pill">JavaScript</span>
-                  <span class="tech-cloud-pill">Bootstrap</span>
-                  <span class="tech-cloud-pill">React</span>
-                  <span class="tech-cloud-pill">Next.js</span>
-                </div>
-                <div class="tech-cloud-group">
-                  <span class="tech-cloud-label">Backend</span>
-                  <span class="tech-cloud-pill">PHP</span>
-                  <span class="tech-cloud-pill">CodeIgniter</span>
-                  <span class="tech-cloud-pill">Node.js</span>
-                  <span class="tech-cloud-pill">APIs</span>
-                </div>
-                <div class="tech-cloud-group">
-                  <span class="tech-cloud-label">Database</span>
-                  <span class="tech-cloud-pill">MySQL</span>
-                </div>
-                <div class="tech-cloud-group">
-                  <span class="tech-cloud-label">Cloud / Serviços</span>
-                  <span class="tech-cloud-pill">Firebase</span>
-                  <span class="tech-cloud-pill">Firebase Hosting</span>
-                  <span class="tech-cloud-pill">AdMob</span>
-                </div>
-                <div class="tech-cloud-group">
-                  <span class="tech-cloud-label">Ferramentas</span>
-                  <span class="tech-cloud-pill">Git</span>
-                  <span class="tech-cloud-pill">GitHub</span>
-                  <span class="tech-cloud-pill">VS Code</span>
-                  <span class="tech-cloud-pill">IA para desenvolvimento</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================== NÚMEROS ===================== -->
-    <section class="section stats-section">
-      <div class="container">
-        <div class="row g-4 text-center">
-          <div class="col-6 col-lg-3" data-reveal>
-            <span class="stat-value" data-counter="4">0</span>
-            <p class="stat-label">Projetos em construção</p>
-          </div>
-          <div class="col-6 col-lg-3" data-reveal>
-            <span class="stat-value" data-counter="6">0</span>
-            <p class="stat-label">Experimentos</p>
-          </div>
-          <div class="col-6 col-lg-3" data-reveal>
-            <span class="stat-value" data-counter="3">0</span>
-            <p class="stat-label">Anos de desenvolvimento</p>
-          </div>
-          <div class="col-6 col-lg-3" data-reveal>
-            <span class="stat-value" data-counter="8">0</span>
-            <p class="stat-label">Produtos idealizados</p>
-          </div>
-        </div>
-        <p class="stats-note">* Números conceituais — ajuste em <code>js/script.js</code> conforme sua realidade.</p>
       </div>
     </section>
 
     <!-- ===================== CONTATO ===================== -->
-    <section class="section" id="contato">
+    <section class="section contact-section" id="contato">
       <div class="container">
         <div class="contact-box" data-reveal>
-          <p class="section-eyebrow">Contato</p>
-          <h2 class="section-title contact-title">Tem uma ideia?</h2>
-          <p class="section-subtitle">Vamos transformar código em alguma coisa real.</p>
+          <div class="contact-content">
+            <span class="section-tag">Contato</span>
+            <h2 class="contact-title">Tem uma ideia?</h2>
+            <p class="contact-subtitle">Vamos transformar código em alguma coisa real.</p>
 
-          <div class="contact-links">
-            <a href="mailto:[ADICIONAR EMAIL]" class="contact-link" id="emailLink">
-              <span class="contact-link-label">Email</span>
-              <span class="contact-link-value">[ADICIONAR EMAIL]</span>
-            </a>
-            <a href="YOUR_GITHUB_URL" class="contact-link" id="githubLink2" target="_blank" rel="noopener noreferrer">
-              <span class="contact-link-label">GitHub</span>
-              <span class="contact-link-value">[ADICIONAR LINK DO GITHUB]</span>
-            </a>
-            <a href="[ADICIONAR LINK DO LINKEDIN]" class="contact-link" id="linkedinLink" target="_blank" rel="noopener noreferrer">
-              <span class="contact-link-label">LinkedIn</span>
-              <span class="contact-link-value">[ADICIONAR LINK DO LINKEDIN]</span>
-            </a>
+            <div class="contact-links">
+              <a href="mailto:jeferson.tecinfo@gmail.com" class="contact-link" id="emailLink">
+                <span class="contact-link-label">Email</span>
+                <span class="contact-link-value">jeferson.tecinfo@gmail.com</span>
+              </a>
+              <a href="https://github.com/jeferson-Ferreira-Araujo" class="contact-link" id="githubLink2" target="_blank" rel="noopener noreferrer">
+                <span class="contact-link-label">GitHub</span>
+                <span class="contact-link-value">github.com/jeferson-Ferreira-Araujo</span>
+              </a>
+              <a href="https://www.linkedin.com/in/jefersonfaraujo/" class="contact-link" id="linkedinLink" target="_blank" rel="noopener noreferrer">
+                <span class="contact-link-label">LinkedIn</span>
+                <span class="contact-link-value">linkedin.com/in/jefersonfaraujo</span>
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -336,9 +208,9 @@
 
   <!-- ===================== FOOTER ===================== -->
   <footer class="site-footer">
-    <div class="container footer-container">
+    <div class="footer-container container">
       <div class="footer-brand">
-        <span class="brand-mark">JA</span>
+        <span class="footer-mark">JA</span>
         <div>
           <p class="footer-name">Jeferson Araujo</p>
           <p class="footer-tag">Construindo ideias através de código.</p>
@@ -348,15 +220,13 @@
       <ul class="footer-links">
         <li><a href="#projetos">Projetos</a></li>
         <li><a href="#sobre">Sobre</a></li>
-        <li><a href="#stack">Stack</a></li>
         <li><a href="#contato">Contato</a></li>
       </ul>
 
-      <p class="footer-copy">© <span id="year"></span> Jeferson Araujo. Todos os direitos reservados.</p>
+      <p class="footer-copy">&copy; <span id="year"></span> Jeferson Araujo. Todos os direitos reservados.</p>
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/script.js" defer></script>
 </body>
 </html>
